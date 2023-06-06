@@ -24,7 +24,7 @@ If the level was failed, you will hear your score and see where the moving led w
 The game will reset after either you win, or lose. and is ready to play again. 
 If in hard mode, after the game is complete, it will reset to normal mode.
 
-Scoring: 
+###Scoring: 
 Press the button before the moving led passes the lock led for two points
 Press the button after one pass, score 1 point
 Pressing after two or more passes, score 0 points. 
