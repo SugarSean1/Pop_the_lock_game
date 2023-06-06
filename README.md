@@ -10,7 +10,7 @@ For bragging rights and high score, be quick and press the button before the led
 Watch out, everytime the led passes the lock led, the scoring for the level will go down by one.<br />
 
 ## How to play
-(written for the Circuit Playground Express, originated with the cord pointing down)
+(written for the Circuit Playground Express, oriented with the cord pointing down)
 
 When you boot up the game it will be in an idle mode light show. <br />
 Press the left button to start the game. <br />
