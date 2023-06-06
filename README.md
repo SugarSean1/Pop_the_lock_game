@@ -40,7 +40,7 @@ The inputs for this game are left, right and switch on the Circut Playground Exp
 The outputs and sources: <br />
 rainbow pattern idle mode, adapted from: https://learn.adafruit.com/circuit-playground-kaleidoscope/inside and Chet Udell. <br />
 Songs generated with "midi note calculations" Source: Chet Udell, 2023 https://github.com/udellc <br />
-Speech sound effects: Aurdino examples, Talk_US_Male library <br />
+Speech sound effects: Ardino examples, Talk_US_Male library <br />
 "Sparkle win" pattern & "Starting red, yellow, go" pattern: Sean Carver <br />
 Midi tones: Sean Carver <br />
 <br />
