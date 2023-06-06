@@ -2,12 +2,19 @@
 *   Author: Sean Carver, 2023
 *   Creation of game that mimics the concept of "Pop The Lock Arcade" Game.
 *   References / sources:	
-*  	 Chet Udell: midi calculator at the bottom of this sketch & adaptation of the rainbow pattern used in the idle mode; adapted from: https://learn.adafruit.com/circuit-playground-kaleidoscope/inside
-* 
-*     - For loop that Plays through each note of the array
-*     - Generate random duration to pause between 17s and 38s, maybe multiply this by factor of 10 to accomidate 100 voices instead of 8
-* 
-*   - Loop to top
+*  	Chet Udell: midi calculator at the bottom of this sketch. Used to create midi tones
+	Chet Udell: Rainbow pattern. Used in the idle mode and furthur adapted from: https://learn.adafruit.com/circuit-playground-kaleidoscope/inside
+* 	Speech from Aurdino Talk_US_Male example
+*     
+*	How to play:
+*	Left button to start game during "rainbow" idle mode
+*	Left and right button to "pop the lock" 
+*	Press either button when moving led and lock led ARE in the same position.
+*	Win when level ten is reached.
+*	lose when button press and when moving led and lock led are NOT in same position
+*	Points: 2 points for successful button press before moving led passes lock led. 1 point for one pass, and 0 points for more than two passes.
+*     	Hard mode: move switch while in idle to either side to engage a faster mode. You will hear two tones. hard mode resets after game ends.
+*	Game resets to original values after game ends.
 */
 
 #include <Adafruit_CircuitPlayground.h>
