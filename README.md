@@ -4,7 +4,8 @@ Auther: Sean Carver
 
 ## Object of the game
 The object of the game is to time your button presses to pop the lock for each level.
-Once you pass all ten levels, you win! Be warned, the speed of the moving led will progressivly get faster with each level. 
+Once you pass all ten levels, you win!
+Be warned, the moving led will change direction and get faster with each level, and the lock led with randomly change position.
 For bragging rights and high score, be quick and press the button before the led moves past the lock led for two points. 
 Be fast as every time the led passes the lock led, the scoring for the level will go down by one. 
 
@@ -28,6 +29,17 @@ Press the button before the moving led passes the lock led for two points
 Press the button after one pass, score 1 point
 Pressing after two or more passes, score 0 points. 
 Points from each level will add to your current score. 
+The higest score posible is 20. 
 
+##About this project, acknologment, and sources.
+This game was created to mimic the arcade game Pop the Lock, and as a final for an ENGR class and future use in fully developed handheld game. 
+The inputs for this game is the left, right and switch on the Circut Playground Express. 
 
-## What the code is doing 
+The outputs and sources:
+rainbow pattern idle mode, adapted from: https://learn.adafruit.com/circuit-playground-kaleidoscope/inside and Chet Udell.
+Songs generated with "midi note claculations" Source: Chet Udell, 2023 https://github.com/udellc
+Speech sound effects: Aurdino examples, Talk_US_Male library
+Sparkle win pattern & Starting red, yellow, go pattern: Sean Carver
+Midi tones: Sean Carver
+
+Final concept and creation was by Sean Carver
