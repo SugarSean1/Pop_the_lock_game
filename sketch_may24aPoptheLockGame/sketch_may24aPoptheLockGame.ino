@@ -45,10 +45,10 @@ const uint8_t spIS[]            PROGMEM = {0xAD,0xED,0xD5,0x58,0xA4,0x9E,0xCE,0x
 const uint8_t spPOINT[]         PROGMEM = {0x06,0xA8,0xCC,0x4B,0x03,0x2D,0xF3,0x69,0x2B,0x8C,0x1A,0xAF,0x2C,0x98,0xE9,0x28,0x4A,0xB3,0xF3,0x53,0xC6,0x90,0x9E,0xC1,0x6D,0x76,0x77,0xE6,0x9C,0x5D,0xD3,0x75,0xF1,0x58,0x5B,0x75,0x76,0xB7,0x4F,0xE3,0xE8,0xCE,0x31,0x3A,0x17,0xB6,0xB3,0x45,0x96,0xF4,0xAA,0x6D,0x4F,0x75,0x76,0xA3,0x94,0x66,0x6E,0x10,0x28,0x42,0xB9,0x8B,0xC8,0x06,0x50,0xC0,0x32,0x11,0x0A,0x58,0x76,0x87,0x01,0x3D,0xB5,0xFE,0x3F};
 
 int startLights = 1;
-int targetLed;
+int targetLed; 
 int ledRunner;
-int ledRunnerSpeed = 500;
-int ledRunnerSpeedMin = 50;
+int ledRunnerSpeed = 500; //upper bounds for delay between levels
+int ledRunnerSpeedMin = 50; //lower bounds for delay between levels
 int direction = 1;
 bool gameActive = false;
 int scoreMeter = 3;
@@ -59,9 +59,9 @@ const int startingLevel = 1;
 int currentLevel;
 const int maxLevel = 10;
 
-volatile bool playerFlag = false;
-volatile bool startFlag = false;
-volatile bool hardFlag = false;
+volatile bool playerFlag = false; // Player input during game
+volatile bool startFlag = false; // Starts game
+volatile bool hardFlag = false; // Changes speed values 
 bool sucessSound = true;
 
 const int buttonRight = 4; 
@@ -100,15 +100,9 @@ int WIN_SOUND[][2] = {
 };
 
 int LOSE[][2] = {
-    /*{70, 50},
-    {69, 50},
-    {68, 50},
-      {127, 30},//rest*/
- //   {68, 52},
     {67, 52},
     {66, 52},
       {127, 60},//rest
-   // {66, 55},
     {65, 55},
     {64, 55},
       {127, 120},//rest
@@ -140,7 +134,7 @@ void loop() {
   if (gameActive == true){    
     updateGameState();
   }
-  //incase the player presses the player flag button while the game is idling, this prevents an incorrect button flag when the game starts
+  //Incase player presses player flag button while the game is idling, this prevents an incorrect button flag when the game starts
   else if((playerFlag == true) && (gameActive == false)){
     playerFlag = false;
   }
@@ -152,7 +146,7 @@ void loop() {
     CircuitPlayground.playTone(midi[55], 150);
     hardFlag = false;
   }
-  // During the start sequince, the gameActive will change to true, preventing this from triggering until the game ends.
+  // During the start sequence, the gameActive will change to true preventing this from triggering until the game ends.
   else if ((startFlag == true) && (gameActive == false)) {
     delay (20);
     startFlag = false;
@@ -161,7 +155,6 @@ void loop() {
   }
   else{
   rainbow (4,LED_COUNT);
-  //Serial.println("Idle running");  
   }
 }
 
@@ -209,7 +202,7 @@ void startGame(){
 }
 
 void updateGameState(){
-   CircuitPlayground.setPixelColor(ledRunner, 0 , 0 , 0);  
+   CircuitPlayground.setPixelColor(ledRunner, 0 , 0 , 0);  // Clears pervious led location.
    ledRunner = (ledRunner + direction) % LED_COUNT;
 
     if (targetLed == ledRunner){
@@ -217,101 +210,91 @@ void updateGameState(){
     }
 
    if(ledRunner < 0) {
-      ledRunner += LED_COUNT;
+      ledRunner += LED_COUNT; //Moves led around the circle clockwise.
     }
     else if(ledRunner> 9) {
-      ledRunner -= (LED_COUNT+1); 
+      ledRunner -= (LED_COUNT+1);  //Moves led around the circle counterclockwise.
     }
   
     switch(currentLevel){
+		    
       case 1:
-      
          if(ledRunner == targetLed){
           CircuitPlayground.setPixelColor(ledRunner, 100 , 100 , 255);}
         else{
           CircuitPlayground.setPixelColor(ledRunner, 0 , 0 , 255);}
-
        break;
+		    
       case 2:
-      
         if(ledRunner == targetLed){
             CircuitPlayground.setPixelColor(ledRunner, 100 , 125 , 255);}
         else{
            CircuitPlayground.setPixelColor(ledRunner, 0 , 125 , 225);}
-
        break;
+		    
      case 3:
-
         if(ledRunner == targetLed){
            CircuitPlayground.setPixelColor(ledRunner, 100 , 225 , 100);}
         else{
           CircuitPlayground.setPixelColor(ledRunner, 0 , 255 , 0);}
-
        break;
+		    
      case 4:
-
           if(ledRunner == targetLed){
            CircuitPlayground.setPixelColor(ledRunner, 125 , 225 , 100);}
           else{
            CircuitPlayground.setPixelColor(ledRunner, 125 , 255 , 0);}
-
         break;
+		    
       case 5:
-
           if(ledRunner == targetLed){
            CircuitPlayground.setPixelColor(ledRunner, 225 , 225 , 100);}
           else{
            CircuitPlayground.setPixelColor(ledRunner, 255 , 225 , 0);}
-
        break;
+		    
       case 6:
-
           if(ledRunner == targetLed){
            CircuitPlayground.setPixelColor(ledRunner, 225 , 125 , 100);}
           else{
            CircuitPlayground.setPixelColor(ledRunner, 255 , 125 , 0);}
-
        break;  
+		    
       case 7:
-
           if(ledRunner == targetLed){
            CircuitPlayground.setPixelColor(ledRunner, 225 , 100 , 100);}
           else{
            CircuitPlayground.setPixelColor(ledRunner, 255 , 0 , 0);}
-
         break;
+		    
       case 8:
-
           if(ledRunner == targetLed){
            CircuitPlayground.setPixelColor(ledRunner, 225 , 100 , 125);}
           else{
            CircuitPlayground.setPixelColor(ledRunner, 255 , 0 , 125);}
-
-
        break;
+		    
       case 9:
-
           if(ledRunner == targetLed){
            CircuitPlayground.setPixelColor(ledRunner, 255 , 100 , 255);}
           else{
            CircuitPlayground.setPixelColor(ledRunner, 255 , 0 , 225);}
-
        break;
+		    
       case 10:
-      
           if(ledRunner == targetLed){
            CircuitPlayground.setPixelColor(ledRunner, 100 , 100 , 100);}
           else{
            CircuitPlayground.setPixelColor(ledRunner, 255 , 225 , 225);}
-
        break;
+		    
       default:
        break;
     }
    
 
-    float var = static_cast<float>(currentLevel)/maxLevel; // static_cast<float> is with help from chat GBT to figure out why I was not getting a float value from dividing two intigers. which I know now was becasue the divsion of two integers truncates the float aspect. 
-    int speed = ledRunnerSpeed - (ledRunnerSpeed-ledRunnerSpeedMin)*(var);
+    float var = static_cast<float>(currentLevel)/maxLevel; // static_cast<float> introduce float into dividion of two int values to produce float value.
+    int speed = ledRunnerSpeed - (ledRunnerSpeed-ledRunnerSpeedMin)*(var); //Creates decreaing delay value.
     delay (speed);
 
     if (playerFlag){
@@ -324,14 +307,17 @@ void updateGameState(){
       lose();  
       }
     }
-    if ((direction == -1)&&(ledRunner == targetLed-1)){
-      CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
+	if ((direction == -1)&&(ledRunner == targetLed-1)){
+	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
     }
-    else if ((direction == 1) && (ledRunner == targetLed+1)){
-      CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
+	else if ((direction == 1) && (ledRunner == targetLed+1)){
+	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
     }
-    else if ((ledRunner == 9) && (targetLed == 0 )){
-      CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
+	else if ((ledRunner == 9) && (targetLed == 0 )){
+	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
+    }
+	else if ((ledRunner == 0) && (targetLed == 9 )){
+	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
     }
 }
 
@@ -434,11 +420,7 @@ void reset (){
 
 void rainbow (int currentSpeed, int stripLen) {
 
-  // Make an offset based on the current millisecond count scaled by the current speed.
-
   uint32_t offset = millis() / currentSpeed;
-
-  // Loop through each pixel and set it to an incremental color wheel value.
 
   for(int i=0; i<10; ++i) {
 
@@ -556,6 +538,5 @@ void generateMIDI(){
   for (int x = 0; x < 127; ++x)
   {
     midi[x] = (A_four / 32.0) * pow(2.0, ((x - 9.0) / 12.0));
-    //Serial.println(midi[x]);
   }
 }
