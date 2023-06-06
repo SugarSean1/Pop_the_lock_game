@@ -25,6 +25,7 @@ The game will reset after either you win, or lose. and is ready to play again.
 If in hard mode, after the game is complete, it will reset to normal mode.
 
 ###Scoring: 
+
 Press the button before the moving led passes the lock led for two points
 Press the button after one pass, score 1 point
 Pressing after two or more passes, score 0 points. 
@@ -32,6 +33,7 @@ Points from each level will add to your current score.
 The higest score posible is 20. 
 
 ##About this project, acknologment, and sources.
+
 This game was created to mimic the arcade game Pop the Lock, and as a final for an ENGR class and future use in fully developed handheld game. 
 The inputs for this game is the left, right and switch on the Circut Playground Express. 
 
