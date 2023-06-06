@@ -298,7 +298,7 @@ void updateGameState(){
     delay (speed);
 
     if (playerFlag){
-        delay (90);
+        delay (150);
         playerFlag = false;
       if (ledRunner == targetLed){
         handleSuccess();  
