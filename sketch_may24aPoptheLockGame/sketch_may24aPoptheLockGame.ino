@@ -292,7 +292,19 @@ void updateGameState(){
        break;
     }
    
-
+	if ((direction == -1)&&(ledRunner == targetLed-1)){
+	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
+    }
+	else if ((direction == 1) && (ledRunner == targetLed+1)){
+	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
+    }
+	else if ((ledRunner == 9) && (targetLed == 0 )){
+	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
+    }
+	else if ((ledRunner == 0) && (targetLed == 9 )){
+	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
+    }
+	
     float var = static_cast<float>(currentLevel)/maxLevel; // static_cast<float> introduce float into dividion of two int values to produce float value.
     int speed = ledRunnerSpeed - (ledRunnerSpeed-ledRunnerSpeedMin)*(var); //Creates decreaing delay value.
     delay (speed);
@@ -307,18 +319,7 @@ void updateGameState(){
       lose();  
       }
     }
-	if ((direction == -1)&&(ledRunner == targetLed-1)){
-	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
-    }
-	else if ((direction == 1) && (ledRunner == targetLed+1)){
-	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
-    }
-	else if ((ledRunner == 9) && (targetLed == 0 )){
-	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
-    }
-	else if ((ledRunner == 0) && (targetLed == 9 )){
-	CircuitPlayground.setPixelColor(targetLed, 255 , 255 , 255);
-    }
+
 }
 
 void handleSuccess (){
